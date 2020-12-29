@@ -1,0 +1,19 @@
+* The following documents a bug with the =near_bindgen= attribute.
+To reproduce the bug:
+1. Clone the repo.
+2. Try building with =./build=. Fail.
+3. Try building with =cargo build=. Succeed.
+4. Enter file =src/getters.rs=, and swap out the two use statements. This bit:
+#+begin_src rust
+// comment the following line and uncomment out the next use statement to successfully build.
+use crate::{near_bindgen, AccountId, Marketplace, MarketplaceContract};
+//use crate::*; //::{near_bindgen, AccountId, Marketplace, MarketplaceContract};
+#+end_src
+
+5. Rebuild (any method). Succeed.
+
+What changed: We imported everything individually, as opposed to with a glob.
+
+Did we miss an import? Nope. =use crate::*= just appears to be the only way to import things now.
+
+Suggested change on NEAR's behalf: document this or change it.
