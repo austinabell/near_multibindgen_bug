@@ -1,14 +1,10 @@
 mod getters;
 
 use near_sdk::collections::LookupMap;
-use near_sdk::wee_alloc;
 use near_sdk::{
     borsh::{self, BorshDeserialize, BorshSerialize},
     env, near_bindgen, AccountId,
 };
-
-#[global_allocator]
-static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
 
 pub type Token = String;
 
